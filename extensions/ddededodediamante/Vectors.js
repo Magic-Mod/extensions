@@ -24,6 +24,7 @@
               X: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 },
               Y: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 },
             },
+            hideFromPalette: true,
           },
           {
             opcode: "vector3D",
@@ -33,6 +34,26 @@
               X: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 },
               Y: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 },
               Z: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0 },
+            },
+            hideFromPalette: true,
+          },
+          {
+            opcode: "vectorNew",
+            text: Scratch.translate("vector [INPUTS]"),
+            blockType: Scratch.BlockType.ARRAY,
+            arguments: {
+              INPUTS: {
+                type: Scratch.ArgumentType.EXTENDABLE,
+                text: Scratch.translate("[NUM]"),
+                arguments: {
+                  NUM: {
+                    type: Scratch.ArgumentType.NUMBER,
+                    defaultValue: 0,
+                  },
+                },
+                defaultInputs: 2,
+                minInputs: 1,
+              },
             },
           },
           {
@@ -117,6 +138,16 @@
               A: { type: Scratch.ArgumentType.ARRAY },
               B: { type: Scratch.ArgumentType.ARRAY },
               T: { type: Scratch.ArgumentType.NUMBER, defaultValue: 0.5 },
+            },
+          },
+          {
+            opcode: "vectorCompare",
+            text: Scratch.translate("[A]\u200b[OP]\u200b[B]"),
+            blockType: Scratch.BlockType.BOOLEAN,
+            arguments: {
+              A: { type: Scratch.ArgumentType.ARRAY },
+              OP: { type: Scratch.ArgumentType.STRING, menu: "vectorCompare" },
+              B: { type: Scratch.ArgumentType.ARRAY },
             },
           },
           "---",
@@ -208,16 +239,6 @@
               B: { type: Scratch.ArgumentType.ARRAY },
             },
           },
-          {
-            opcode: "vectorCompare",
-            text: Scratch.translate("[A] [OP] [B]"),
-            blockType: Scratch.BlockType.BOOLEAN,
-            arguments: {
-              A: { type: Scratch.ArgumentType.ARRAY },
-              OP: { type: Scratch.ArgumentType.STRING, menu: "vectorCompare" },
-              B: { type: Scratch.ArgumentType.ARRAY },
-            },
-          },
         ],
         menus: {
           vectorOp: {
@@ -289,6 +310,14 @@
         Scratch.Cast.toNumber(args.Y),
         Scratch.Cast.toNumber(args.Z),
       ]);
+    }
+
+    vectorNew(args, util) {
+      return new Float32Array(
+        util
+          .extendableToArray(args, "INPUTS", "NUM")
+          .map((/** @type {unknown} */ i) => Scratch.Cast.toNumber(i))
+      );
     }
 
     vectorFromAngle(args) {
