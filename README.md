@@ -1,8 +1,8 @@
-# NitroBolt Extension Gallery
+# MagicMod Extension Gallery
 
-User-contributed unsandboxed extension gallery for NitroBolt.
+User-contributed unsandboxed extension gallery for MagicMod.
 
-https://extensions.nitrobolt.org/
+https://magic-mod.github.io/extensions/
 
 ## Contributing
 
