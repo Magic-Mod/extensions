@@ -362,7 +362,7 @@ class HomepageFile extends BuildFile {
     this.host =
       mode === "development"
         ? "http://localhost:8000/"
-        : "https://extensions.nitrobolt.org/";
+        : "https://magic-mod.github.io/extensions/";
   }
 
   getType() {
@@ -378,7 +378,7 @@ class HomepageFile extends BuildFile {
   }
 
   getRunExtensionURL(extensionSlug) {
-    return `https://nitrobolt.org/editor?extension=${this.getFullExtensionURL(
+    return `https://magic-mod.github.io/editor?extension=${this.getFullExtensionURL(
       extensionSlug
     )}`;
   }
@@ -389,7 +389,7 @@ class HomepageFile extends BuildFile {
    */
   getRunSampleURL(sampleFile) {
     const path = encodeURIComponent(`samples/${sampleFile.getSlug()}`);
-    return `https://nitrobolt.org/editor?project_url=${this.host}${path}`;
+    return `https://magic-mod.github.io/editor?project_url=${this.host}${path}`;
   }
 
   read() {
@@ -574,7 +574,7 @@ class SitemapFile extends BuildFile {
         if (a.length > b.length) return 1;
         return a - b;
       })
-      .map((path) => `https://extensions.nitrobolt.org${path}`)
+      .map((path) => `https://magic-mod.github.io/extensions${path}`)
       .map((absoluteURL) => `<url><loc>${absoluteURL}</loc></url>`)
       .join("\n");
 
@@ -628,7 +628,7 @@ class SampleFile extends BuildFile {
 
     for (const url of urls) {
       if (
-        !url.startsWith("https://extensions.nitrobolt.org/") ||
+        !url.startsWith("https://magic-mod.github.io/extensions/") ||
         !url.endsWith(".js")
       ) {
         throw new Error(`Invalid extension URL for sample: ${url}`);
